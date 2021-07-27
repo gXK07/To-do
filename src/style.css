@@ -42,16 +42,30 @@ header{
     transform: scale(1.1);
 }
 
+#ProjectTxt{
+    height : 40px;
+    border-bottom: solid#cacaca 0.1px;
+
+}
+
+#ProjectList{
+    height: 700px;
+    width: 300px;
+    border-bottom : solid rgb(207, 207, 207) 0.1px;
+    grid-area: "a";
+    background-color: #fafafa;
+}
 
 #TaskList{
     height: 700px;
-    width: 1000px;
-    border : solid rgb(207, 207, 207) 0.1px
+    width: 1200px;
+    border-bottom : solid rgb(207, 207, 207) 0.1px;
+    border-left : solid #eeeeee 0.1px;
+    grid-area: "b";
 }
 
 form{
-    -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: scale-up-center 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    background-color: white;
     height: 200px;
     width: 400px;
     border : solid rgb(207, 207, 207) 0.1px;
@@ -59,15 +73,40 @@ form{
     margin: auto;
     left: 0;
     right: 0;
+    top: 0;
+    bottom: 0;
     box-shadow: 0px 0px 30px 0px rgba(92, 92, 92, 0.568);
     border-radius: 12px;
+    
+}
+.formfield{
+    width: 390px;
+    border-radius: 6px;
+    border : solid #fafafa 0.1px;
+    height: 30px;
+    margin: auto;
+}
+#central{
+    display: grid;
+    grid-template-areas: "a b b";
 }
 #taskField{
-    height: 100px;
-    width: 500px;
-    border : solid rgb(207, 207, 207) 0.1px
+    height: 50px;
+    width: 1200px;
+    border-bottom: solid #cfcfcf 0.1px;
 }
 
-.field{
-    border : solid rgb(207, 207, 207) 0.1px;
+#projectField{
+    margin-left: 43px;
+    height: 40px;
+    width: 250px;
+    border-radius: 6px;
+}
+#projectField:hover{
+    cursor: pointer;
+    background-color: #ebebeb;
+}
+
+.fieldT{
+    border : none /* oui ca sert a r  */
 }

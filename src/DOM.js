@@ -1,79 +1,115 @@
+
+
 const DisplayForm = {
-    task(isClicked){
-        let dataForm = new Array(5)
-        // étape 1 : Afficher le formulaire d'une nouvelle tache
-        const form = document.createElement("form");
+    isClicked : document.createElement("button"),
+    task(dataFormTask){
+        //creation du formulaire
+        let form = document.createElement("form");
         Container.appendChild(form);
-        // créeation form de la task 
-        const formFields = new Array(6);
-        for(let i=0; i<6; i++){
+        const formFields = new Array(7);
+        for(let i=0; i<7; i++){
             formFields[i] = document.createElement("input");
             form.appendChild(formFields[i]);
+            formFields[i].classList.add("formfield");
         }
         formFields[0].setAttribute("id", "Title");
         formFields[0].setAttribute("placeholder", "Title");
         formFields[1].setAttribute("id", "Description");
         formFields[1].setAttribute("placeholder", "Description");
-        formFields[2].setAttribute("id", "DueDate");
-        formFields[2].setAttribute("placeholder", "DueDate");
+        formFields[2].setAttribute("id", "Project");
+        formFields[2].setAttribute("placeholder", "Project");
         formFields[3].setAttribute("id", "Priority");
         formFields[3].setAttribute("type", "radio");
         formFields[4].setAttribute("id", "CheckList");
         formFields[4].setAttribute("Type", "checkbox");
-        formFields[5].setAttribute("type", "button");
-        formFields[5].setAttribute("id", "submit");
+        formFields[5].setAttribute("id", "DueDate");
+        formFields[5].setAttribute("placeholder", "DueDate");
+        formFields[6].setAttribute("type", "button");
+        formFields[6].setAttribute("id", "submit");
 
-        formFields[5].onclick = () => {
+
+        //actions à faire quand on click sur "submit"
+        formFields[6].onclick = () => {
             for(let i=0; i< 5; i++){
-                dataForm[i] = formFields[i].value
+                dataFormTask[i] = formFields[i].value
             }
-            console.log("je suis rentré dans DOM")
-            isClicked = true;
-            //deleteForm()
-            return dataForm;
+            //déclanche la suite de "newtask" dans le fichier "Logic.js"
+            this.isClicked.click();
         }
     
     },
-    project(){
-        console.log("étape 1 : Afficher le formulaire d'un nouveau project");
-        const form = document.createElement("form");
+    project(dataFormProject){
+        let form = document.createElement("form");
         Container.appendChild(form);
         // creation form du projet 
         const formFields = new Array(3);
         for(let i=0; i<3; i++){
             formFields[i] = document.createElement("input");
             form.appendChild(formFields[i]);
+            formFields[i].classList.add("formfield");
         }
         formFields[0].setAttribute("id", "Title");
         formFields[0].setAttribute("placeholder", "Title");
         formFields[1].setAttribute("id", "Description");
         formFields[1].setAttribute("placeholder", "Description");
-        formFields[2].setAttribute("type", "submit");
+        formFields[2].setAttribute("type", "button");
         formFields[2].setAttribute("id", "submit");
+
+        formFields[2].onclick = () => {
+            console.log("click")
+            for(let i=0; i< 2; i++){
+                dataFormProject[i] = formFields[i].value
+            }
+            //deleteForm()
+            this.isClicked.click();
+        }
     }
 }
-
 const Display = {
     task(Task){
         const TaskList = document.getElementById("TaskList");
         const taskField = document.createElement("div");
         taskField.setAttribute("id", "taskField");
         TaskList.appendChild(taskField);
-        let field = new Array(5);
+        let fieldT = new Array(5);
         for(let i=0; i<5; i++){
-            field[i] = document.createElement("div");
-            taskField.appendChild(field[i])
-            field[i].classList.add("field");
+            fieldT[i] = document.createElement("div");
+            taskField.appendChild(fieldT[i])
+            fieldT[i].classList.add("fieldT");
         }
-        field[0].textContent = Task.Title;
-        field[1].textContent = Task.Description;
-        field[2].textContent = Task.date;
-        field[3].textContent = Task.Priority;
-        field[4].textContent = Task.Projet;
+        fieldT[0].textContent = Task.Title;
+        fieldT[1].textContent = Task.Description;
+        fieldT[2].textContent = Task.date;
+        fieldT[3].textContent = Task.Priority;
+        fieldT[4].textContent = Task.Projet;
     },
-    project() {
-        console.log("étape 3 : Afficher le nouveau project");
+    addProject(Project) {
+            const projectList = document.getElementById("ProjectList");
+            const projectField = document.createElement("div");
+            projectField.setAttribute("id", "projectField");
+            projectList.appendChild(projectField);
+            let fieldP = new Array(2);
+            for(let i=0; i<3; i++){
+                fieldP[i] = document.createElement("div");
+                projectField.appendChild(fieldP[i])
+                fieldP[i].classList.add("fieldP");
+            }
+            fieldP[0].textContent = Project.Title;
+            fieldP[1].textContent = Project.Description;
+            projectField.addEventListener("click", () => {this.show(Project)})
+        },
+    show(project){
+        // pour la partie ou quand faut clicker sur un project pour que ca affiche ses taches :
+        // 1) vider le <div> TaskList
+        // 2) faire une loop sur l'array ArrayTask du project passer en argument et afficher toutes taches dans task list avec DisplayTask
+        const TaskList = document.getElementById("TaskList");
+        while (TaskList.firstChild) {
+            TaskList.removeChild(TaskList.lastChild);
+          }
+        for(let i=0; i<project.taskArray.length; i++){
+            this.task(project.taskArray[i]);
+        }
     }
-}
+    }
 
 export {DisplayForm, Display}
