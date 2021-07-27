@@ -7,7 +7,7 @@ const DisplayForm = {
         let form = document.createElement("form");
         Container.appendChild(form);
         const formFields = new Array(7);
-        for(let i=0; i<7; i++){
+        for(let i=0; i<6; i++){
             formFields[i] = document.createElement("input");
             form.appendChild(formFields[i]);
             formFields[i].classList.add("formfield");
@@ -18,18 +18,18 @@ const DisplayForm = {
         formFields[1].setAttribute("placeholder", "Description");
         formFields[2].setAttribute("id", "Project");
         formFields[2].setAttribute("placeholder", "Project");
-        formFields[3].setAttribute("id", "Priority");
-        formFields[3].setAttribute("type", "radio");
-        formFields[4].setAttribute("id", "CheckList");
-        formFields[4].setAttribute("Type", "checkbox");
-        formFields[5].setAttribute("id", "DueDate");
-        formFields[5].setAttribute("placeholder", "DueDate");
-        formFields[6].setAttribute("type", "button");
-        formFields[6].setAttribute("id", "submit");
+        formFields[3].setAttribute("id", "DueDate");
+        formFields[3].setAttribute("placeholder", "DueDate");
+        formFields[4].setAttribute("type", "button");
+        formFields[4].setAttribute("id", "submit");
+        formFields[5].setAttribute("type", "button");
+        formFields[5].setAttribute("id", "cancel");
+        formFields[5].textContent = "cancel";
+
 
 
         //actions à faire quand on click sur "submit"
-        formFields[6].onclick = () => {
+        formFields[4].onclick = () => {
             for(let i=0; i< 5; i++){
                 dataFormTask[i] = formFields[i].value
             }

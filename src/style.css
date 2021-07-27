@@ -81,10 +81,13 @@ form{
 }
 .formfield{
     width: 390px;
-    border-radius: 6px;
-    border : solid #fafafa 0.1px;
     height: 30px;
     margin: auto;
+    border : none
+}
+.formfield:focus{
+    outline: none;
+
 }
 #central{
     display: grid;
@@ -106,7 +109,32 @@ form{
     cursor: pointer;
     background-color: #ebebeb;
 }
-
+#submit{
+    background-color: #d8564a;
+    width: 100px;
+    margin: 5px;
+    border-radius: 6px;
+}
+#cancel{
+    background: none;
+    border : solid rgba(128, 128, 128, 0.479) 0.1px;
+    width: 100px;
+    margin: 5px;
+    border-radius: 6px;
+}
+#submit:hover{
+    cursor: pointer;
+}
+#cancel:hover{
+    cursor: pointer;
+}
 .fieldT{
     border : none /* oui ca sert a r  */
+}
+
+#Title{
+    height: 60px;
+}
+#Description{
+    height: 15px;
 }
