@@ -1,15 +1,19 @@
 import {DisplayForm, Display} from "./DOM";
+import { compareAsc, format } from 'date-fns';
 
 
 const factoryTask = (array) => {
     // créer l'objet task
     const Title = array[0];
     const Description = array[1];
-    const Project = array[2]
+    let Project = ''
+    for(let i =0; i<Projects.list.length; i++){
+        if(array[2] === Projects.list[i].Title){
+            Project = Projects.list[i];
+        }
+    }
     const DueDate = array[3];
-    const Priority = array[4];
-    const CheckList = array[5];
-    return {Title, Description, DueDate, Priority, CheckList, Project}
+    return {Title, Description, DueDate, Project}
 }
 
 const factoryProject = (array) => {
@@ -22,28 +26,22 @@ const factoryProject = (array) => {
 const newTask = () => {
     let dataFormTask = new Array(5)
     DisplayForm.task(dataFormTask);
-    DisplayForm.isClicked.addEventListener("click", () => {
+    DisplayForm.isClicked[0].addEventListener("click", () => {
     let objTask = factoryTask(dataFormTask);
-    for(let i=0; i<Projects.list.length; i++){
-        if(objTask.Project === Projects.list[i].Title){
-            Projects.list[i].taskArray.push(objTask);
-            console.log(Projects.list[i])
-            Display.show(Projects.list[i])
-        }
-    }
-    // pour l'instant je pousse tout dans le project de base mais apres faudra faire une boucle pour pousser en fonction de "=== obj.title"
-    // Projects.list[0].taskArray.push(objTask);
-    // Display.task(objTask);
+    objTask.Project.taskArray.push(objTask);
+    Display.show(objTask.Project);
+    dataFormTask = [];
     })
     }
 
 const newProject = () => {
     let dataFormProject = new Array(2)
     DisplayForm.project(dataFormProject);
-    DisplayForm.isClicked.addEventListener("click", () => {
+    DisplayForm.isClicked[1].addEventListener("click", () => {
     let objProject = factoryProject(dataFormProject);
     Projects.list.push(objProject);
     Display.addProject(objProject);
+    dataFormProject =[];
     })
 }
 
