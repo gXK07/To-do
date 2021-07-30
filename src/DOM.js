@@ -17,8 +17,8 @@ const DisplayForm = {
         formFields[1].setAttribute("placeholder", "Description");
         formFields[2].setAttribute("id", "Project");
         formFields[2].setAttribute("placeholder", "Project");
-        formFields[3].setAttribute("id", "DueDate");
-        formFields[3].setAttribute("placeholder", "DueDate");
+        formFields[3].setAttribute("class", "DueDate");
+        formFields[3].setAttribute("type", "Date");
         formFields[4].setAttribute("type", "button");
         formFields[4].setAttribute("id", "submit");
         formFields[5].setAttribute("type", "button");
@@ -27,9 +27,14 @@ const DisplayForm = {
 
         //actions à faire quand on click sur "submit"
         formFields[4].onclick = () => {
+            // if(dataFormTask[0] === undefined){
+            //     alert("choose a title");
+            // }
+            // else{
             for(let i=0; i< 5; i++){
                 dataFormTask[i] = formFields[i].value
             }
+            
             //déclanche la suite de "newtask" dans le fichier "Logic.js"
             this.isClicked[0].click();
             //deleteForm()
@@ -39,6 +44,7 @@ const DisplayForm = {
             }
             Container.removeChild(form);
             form = null;
+        // }
             
         }
 
@@ -72,10 +78,15 @@ const DisplayForm = {
         formFields[3].setAttribute("id", "cancel");
 
         formFields[2].onclick = () => {
+            // chopper le id="projectfield" et regarder les element a l'intéieur pour la boucle
+            // let use = false;
+            // for(let i=0; i<; i++){
+            //     if(dataFormProject)
+            // }
             for(let i=0; i< 2; i++){
                 dataFormProject[i] = formFields[i].value
             }
-            this.isClicked[1].click();
+            this.isClicked[1].click(); // c'est ca qui déclanche la boucle
             for(let i=0; i<4; i++){
                 form.removeChild(formFields[i])
                 formFields[i] = null;
@@ -109,6 +120,7 @@ const Display = {
         fieldT[0].textContent = Task.Title;
         fieldT[1].textContent = Task.Description;
         fieldT[2].textContent = Task.DueDate;
+        fieldT[2].setAttribute("class", "DueDate");
     
         fieldT[3] = document.createElement("button");
         fieldT[3].setAttribute("id", "delete");
@@ -127,26 +139,15 @@ const Display = {
     addProject(Project) {
             const projectList = document.getElementById("ProjectList");
             const projectField = document.createElement("div");
-            projectField.setAttribute("id", "projectField");
+            projectField.classList.add("projectField");
             projectList.appendChild(projectField);
-            // let fieldP = new Array(2);
-            // for(let i=0; i<2; i++){
-            //     fieldP[i] = document.createElement("div");
-            //     projectField.appendChild(fieldP[i])
-            //     fieldP[i].classList.add("fieldP");
-            // }
-            let fieldP = document.createElement("div");
-            fieldP.classList.add("fieldP");
-            fieldP.setAttribute("id", Project.Title);
-            projectField.appendChild(fieldP)
-            fieldP.textContent = Project.Title;
-            // fieldP[1].textContent = Project.Description;
+            projectField.setAttribute("id", Project.Title);
+            projectField.textContent = Project.Title;
             projectField.addEventListener("click", () => {this.show(Project)})
         },
-    show(project){
-        // pour la partie ou quand faut clicker sur un project pour que ca affiche ses taches :
-        // 1) vider le <div> TaskList
-        // 2) faire une loop sur l'array ArrayTask du project passer en argument et afficher toutes taches dans task list avec DisplayTask
+        // affiche les taches d'un projet dans la zone de droite
+    show(project){  
+
         const TaskList = document.getElementById("TaskList");
         while (TaskList.firstChild) {
             TaskList.removeChild(TaskList.lastChild);
@@ -154,7 +155,8 @@ const Display = {
         for(let i=0; i<project.taskArray.length; i++){
             this.task(project.taskArray[i]);
         }
-        const allFileds = document.getElementsByClassName("fieldP")
+        // met le curseur sur le project quand on affiche ses taches
+        const allFileds = document.getElementsByClassName("projectField")
         for(let i=0; i<allFileds.length; i++){
         allFileds[i].classList.remove("onclick");
         }

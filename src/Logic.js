@@ -1,6 +1,9 @@
 import {DisplayForm, Display} from "./DOM";
 import { compareAsc, format } from 'date-fns';
-
+let comptorTask = 0 ;
+let cP = 1 ;
+let arrayDataFormT = new Array;
+let dataFormProject = new Array;
 
 const factoryTask = (array) => {
     // créer l'objet task
@@ -13,10 +16,12 @@ const factoryTask = (array) => {
         }
     }
     const DueDate = array[3];
+    console.log(DueDate);
     return {Title, Description, DueDate, Project}
 }
 
 const factoryProject = (array) => {
+    console.log("je me suis déclanché avec cette array:", array);
     let taskArray = [];
     const Title = array[0];
     const Description = array[1];
@@ -24,6 +29,7 @@ const factoryProject = (array) => {
 }
 
 const newTask = () => {
+    comptorTask++;
     let dataFormTask = new Array(5)
     DisplayForm.task(dataFormTask);
     DisplayForm.isClicked[0].addEventListener("click", () => {
@@ -35,13 +41,14 @@ const newTask = () => {
     }
 
 const newProject = () => {
-    let dataFormProject = new Array(2)
-    DisplayForm.project(dataFormProject);
+    dataFormProject[cP] = new Array(2)
+    DisplayForm.project(dataFormProject[cP]);
     DisplayForm.isClicked[1].addEventListener("click", () => {
-    let objProject = factoryProject(dataFormProject);
-    Projects.list.push(objProject);
-    Display.addProject(objProject);
-    dataFormProject =[];
+    console.log(cP);
+    console.log(dataFormProject);
+    Projects.list[cP] = factoryProject(dataFormProject[cP]);
+    Display.addProject(Projects.list[cP]);
+    cP++;
     })
 }
 
