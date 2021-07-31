@@ -52,9 +52,17 @@ const newProject = () => {
     })
 }
 
-const Projects = {
+const P = {
     list : [factoryProject(["Project1", "Project de base"])]
     }
-    Display.addProject(Projects.list[0]);
+    
+localStorage.setItem("Projects", JSON.stringify(P));
+const Projects = JSON.parse(localStorage.getItem("Projects"));
+console.log(Projects);
+
+for (let i=0; i<Projects.list.length; i++){
+Display.addProject(Projects.list[i]);
+}
+
 
 export {newTask, newProject}
